@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>袁畅的CSS练习</title>
+    <!-- 外部样式表 -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- 内部样式表 -->
+    <style>
+      h1 {
+        font-family: 楷体;
+        color: #246129;
+      }
+      p {
+        text-indent: 2em;
+        line-height: 1.7;
+      }
+      /* 类选择符 */
+      .abstract {
+        font-size: 14px;
+      }
+      h2 {
+        color: #e480ba;
+      }
+      #CSSbase {
+        color: #3f5fc9;
+      }
+      a:link {
+        color: #deef1f;
+      }
+      a:visited {
+        color: #a9a9a9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS练习</h1>
+    <h2 id="CSSbase">CSS语法基础</h2>
+    <p class="abstract">
+      CSS（Cascading Style Sheets）是一种用于描述网页样式的语言，它可以让网页的外观更加美观、易读。CSS
+      由一系列的规则组成，每个规则由一个选择器和一个声明块组成，选择器用于指定哪些元素需要被应用样式，声明块则包含了需要应用的样式属性和值。
+    </p>
+    <p>
+      CSS 可以通过外部样式表、内部样式表和内嵌样式表来应用。外部样式表是一个单独的文件，其中包含了 CSS
+      规则，可以通过 link 元素来引入。内部样式表是在 HTML 文档的 head 元素中使用 style 元素来定义的，
+    </p>
+    <h2>选择符</h2>
+    <p>
+      这个我的github仓库链接 <a href="https://github.com/yyyjem/yuanchangweb--study">这是我的链接</a>
+      这一段中包含了一个链接，豆瓣电影网 <a href="https://movie.douban.com">豆瓣电影网</a>
+    </p>
+  </body>
+</html>
