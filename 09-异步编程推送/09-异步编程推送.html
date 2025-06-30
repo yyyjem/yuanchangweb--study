@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 异步编程练习</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #a1d1d8;
+        }
+        h1 {
+            color: #e7b4b4;
+            text-align: center;
+        }
+        #demo {
+            background-color: rgb(216, 228, 136);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(233, 136, 136, 0.1);
+            margin-top: 20px;
+        }
+        .loading {
+            color: #87f574;
+        }
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript 异步编程练习</h1>
+    <div id="demo"></div>
+    <script>
+        // 修正后的异步函数示例
+        async function getSomething() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log('111111');
+                    resolve('操作完成');
+                }, 2000);
+            });
+        }
+
+        getSomething()
+            .then(result => {
+                console.log('Async function finished successfully with result:', result);
+            })
+            .catch(error => {
+                console.error('异步操作出错:', error);
+            });
+
+        console.log('2222222');
+
+        // 显示加载状态
+        function showLoading() {
+            document.getElementById('demo').innerHTML = '<p class="loading">加载中，请稍候...</p>';
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            document.getElementById('demo').innerHTML = `<p class="error">${message}</p>`;
+        }
+
+        // 获取仓库最后推送日期
+        async function getLastPushedDate(owner, repo) {
+            // 注意：在 GitHub Pages 部署时，可能会遇到跨域问题，可使用代理解决
+            // 示例代理格式: https://cors-anywhere.herokuapp.com/https://api.github.com/repos/${owner}/${repo}
+            const url = `https://api.github.com/repos/${owner}/${repo}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`网络响应失败，状态码: ${response.status}`);
+                }
+                const data = await response.json();
+                return data.pushed_at;
+            } catch (error) {
+                console.error('获取推送日期失败:', error);
+                throw error;
+            }
+        }
+
+        // 主函数
+        async function main() {
+            const owner = 'yangjh-xbmu';
+            const repo = 'Web-develop';
+            try {
+                showLoading();
+                const date = await getLastPushedDate(owner, repo);
+                if (date) {
+                    document.getElementById('demo').innerText = `最后一次推送日期: ${date}`;
+                } else {
+                    showError('未获取到推送日期，请检查仓库信息。');
+                }
+            } catch (error) {
+                showError(`获取推送日期失败: ${error.message}`);
+            }
+        }
+
+        // 执行主函数
+        main();
+    </script>
+</body>
+</html>
